@@ -17,8 +17,7 @@ public class Program
             Console.WriteLine("  1. Create a New Profile");
             Console.WriteLine("  2. Load Existing Profiles");
             Console.WriteLine("  3. Exit");
-            Console.Write("\nPlease enter the number of your choice: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            int choice = Validator.GetValidInt("\nPlease enter the number of your choice: ");
             switch (choice)
             {
                 case 1: // create new profile
@@ -46,6 +45,7 @@ public class Program
             }
         }
     }
+
     // profile management, where the user can make calculations
     static void ProfileMenu(User user)
     {
@@ -57,8 +57,7 @@ public class Program
             Console.WriteLine("2. Daily Calorie Intake Calculator");
             Console.WriteLine("3. Calculate Macronutrients");
             Console.WriteLine("4. Quit");
-            Console.Write("Please enter the number of your choice: ");
-            int profileChoice = Convert.ToInt32(Console.ReadLine());
+            int profileChoice = Validator.GetValidInt("Please enter the number of your choice: ");
 
             switch (profileChoice)
             {
@@ -88,33 +87,40 @@ public class Program
             }
         }
     }
+
     // calorie intake menu
     static void CalorieIntakeMenu(User user)
     {
-        Console.Clear();
-        Console.WriteLine("==============================================");
-        Console.WriteLine("         Daily Caloric Intake Calculator");
-        Console.WriteLine("==============================================\n");
-        Console.WriteLine("Please select your goal by entering the corresponding number:");
-        Console.WriteLine("1. Maintain current weight");
-        Console.WriteLine("2. Lose weight");
-        Console.WriteLine("3. Gain weight");
-        Console.Write("\nYour choice: ");
-        int weightChoice = Convert.ToInt32(Console.ReadLine());
-        switch (weightChoice)
+        while (true)
         {
-            case 1: // shows TDEE
-                user.MaintinenceCals();
-                break;
-            case 2: // shows calorie goal for losing weight
-                user.WeightLossCalc();
-                break;
-            case 3: // shows calorie goal for gaining weight
-                user.WeightGainCalc();
-                break;
-            default: // bad input
-                Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
-                break;
+            Console.Clear();
+            Console.WriteLine("==============================================");
+            Console.WriteLine("         Daily Caloric Intake Calculator");
+            Console.WriteLine("==============================================\n");
+            Console.WriteLine("Please select your goal by entering the corresponding number:");
+            Console.WriteLine("1. Maintain current weight");
+            Console.WriteLine("2. Lose weight");
+            Console.WriteLine("3. Gain weight");
+            int weightChoice = Validator.GetValidInt("\nYour choice: ");
+
+            switch (weightChoice)
+            {
+                case 1: // shows TDEE
+                    user.MaintinenceCals();
+                    break;
+                case 2: // shows calorie goal for losing weight
+                    user.WeightLossCalc();
+                    break;
+                case 3: // shows calorie goal for gaining weight
+                    user.WeightGainCalc();
+                    break;
+                default: // bad input
+                    Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
+                    Console.WriteLine("Press any key to try again...");
+                    Console.ReadKey();
+                    continue; // restart the loop
+            }
+            break; // valid input; exit the loop
         }
         Console.WriteLine("Press any key to return to the profile management menu...");
         Console.ReadKey();

@@ -46,23 +46,29 @@ public class ChildUser: User
         Console.Clear();
         while (true)
         {
-        Console.WriteLine("================================================");
-        Console.WriteLine("The number of reccomended pounds to lose each week is 0.5 - 1 pounds.\n");
-        Console.WriteLine("How much weight would you like to lose per week?");
-        Console.Write("Enter number of pounds per week: ");
-        double _lossChoice = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("================================================");
+            Console.WriteLine("The number of recommended pounds to lose each week is 0.5 - 1 pounds.\n");
+            Console.WriteLine("How much weight would you like to lose per week?");
+            Console.Write("Enter number of pounds per week: ");
+            
+            double _lossChoice;
+            if (!double.TryParse(Console.ReadLine(), out _lossChoice))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                continue;
+            }
+
             if (_lossChoice < 0)
             {
                 Console.WriteLine("Please enter a number greater than 0.");
             }
             else if (_lossChoice > 1)
             {
-                Console.WriteLine("It is not reccomended that you lose more than 1 pounds per week.");
+                Console.WriteLine("It is not recommended that you lose more than 1 pounds per week.");
             }
-            else if (_lossChoice < 1 && _lossChoice > 0)
+            else if (_lossChoice <= 1 && _lossChoice > 0)
             {
                 _dailyCalories = _TDEE - ((_lossChoice * 3500) / 7);
-                _dailyCalories = Math.Round(_dailyCalories,2);
                 break;
             }
         }
@@ -74,23 +80,29 @@ public class ChildUser: User
         Console.Clear();
         while (true)
         {
-        Console.WriteLine("================================================");
-        Console.WriteLine("The number of reccomended pounds to gain each week is 0.5 - 1 pounds.\n");
-        Console.WriteLine("How much weight would you like to gain per week?");
-        Console.Write("Enter number of pounds per week: ");
-        double _gainChoice = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("================================================");
+            Console.WriteLine("The number of recommended pounds to gain each week is 0.5 - 1 pounds.\n");
+            Console.WriteLine("How much weight would you like to gain per week?");
+            Console.Write("Enter number of pounds per week: ");
+            
+            double _gainChoice;
+            if (!double.TryParse(Console.ReadLine(), out _gainChoice))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                continue;
+            }
+
             if (_gainChoice < 0)
             {
                 Console.WriteLine("Please enter a number greater than 0.");
             }
             else if (_gainChoice > 1)
             {
-                Console.WriteLine("It is not reccomended that you gain more than 1 pounds per week.");
+                Console.WriteLine("It is not recommended that you gain more than 1 pounds per week.");
             }
             else if (_gainChoice <= 1 && _gainChoice > 0)
             {
                 _dailyCalories = _TDEE + ((_gainChoice * 3500) / 7);
-                _dailyCalories = Math.Round(_dailyCalories,2);
                 break;
             }
         }
