@@ -1,0 +1,6 @@
+SimpleGoal:Make my bed,make my bed this morning,50,True
+EternalGoal:Pray,say a prayer,10,False,0
+ChecklistGoal:Do my homework,Finish an assignment,40,False,200,1000,0
+ChecklistGoal:Exercise,go workout,30,True,5,75,5
+SimpleGoal:Make dinner,make dinner for my family,30,False
+ChallengeGoal:Meditation,Complete 15 minutes of meditation,40,False (ChallengeGoal)
