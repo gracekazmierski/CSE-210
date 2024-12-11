@@ -56,9 +56,9 @@ public class Program
             Console.WriteLine("1. Display Profile");
             Console.WriteLine("2. Daily Calorie Intake Calculator");
             Console.WriteLine("3. Calculate Macronutrients");
-            Console.WriteLine("4. Quit");
+            Console.WriteLine("4. Update Profile");
+            Console.WriteLine("5. Quit");
             int profileChoice = Validator.GetValidInt("Please enter the number of your choice: ");
-
             switch (profileChoice)
             {
                 case 1: // displays the profile
@@ -78,6 +78,10 @@ public class Program
                     MacronutrientCalculator.Calculate(user);
                     break;
                 case 4:
+                    user.UpdateProfile();
+                    user.CalcActivity();
+                    break;
+                case 5:
                     return; // quits menu
                 default:
                     Console.WriteLine("Invalid choice. Please try again."); // bad input
@@ -106,7 +110,7 @@ public class Program
             switch (weightChoice)
             {
                 case 1: // shows TDEE
-                    user.MaintinenceCals();
+                    user.MaintenanceCals();
                     break;
                 case 2: // shows calorie goal for losing weight
                     user.WeightLossCalc();

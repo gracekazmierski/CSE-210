@@ -15,6 +15,7 @@ public class AthleteUser: User
 
     public override void CalcActivity()
     {
+        Console.Clear();
         Console.WriteLine("Please enter your approximate acitivty level: ");
         Console.WriteLine("   1. Moderate Athlete (1-2 hours daily training)");
         Console.WriteLine("   2. Advanced Athlete (2-4 hours daily training)");

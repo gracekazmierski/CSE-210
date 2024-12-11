@@ -1,4 +1,4 @@
-        // this will eventually give the user reccomendations, it'll look something like this:
+
         
         // Console.WriteLine("One pound of adipose tissue is equal to approximately 3500 calories.");
         // Console.WriteLine("In order to lose one pound, you need to have a negative caloric energy balance of 3500 calories.");
@@ -8,11 +8,21 @@
         // {
         //     Console.WriteLine($"Your BMI is {_BMI}. This is classified as underweight. It is not reccomended that you lose any weight.");
         // }
-        // if (_BMI >= 30 && _BMI <= 34.9)
+        // else if (_BMI >= 18.5 && _BMI < 24.9)
+        // {
+        //         Console.WriteLine($"Your BMI is {_BMI}. This is within the optimum range. It is reccomended that you maintain your weight.");
+        // }
+        // else if (_BMI >= 25 && _BMI < 30)
+        // {
+        //         Console.WriteLine($"Your BMI is {_BMI}. This is classified as overweight. It is reccomended that you lose 0.5-1 lbs per week.");
+        // }
+        // else if (_BMI >= 30 && _BMI <= 34.9)
         // {
         //     Console.WriteLine($"Your BMI is {_BMI}. This is classified as obese. It is reccomended that you lose 1-2 lbs per week.");
         // }
-        // if (_BMI >= 35 && _BMI <= 39.9)
+        // else if (_BMI >= 35 && _BMI <= 39.9)
         // {
         //     Console.WriteLine($"Your BMI is {_BMI}. This is classified as severe obesity. Please consult a doctor.");
         // }
+
+        // Console.WriteLine(")

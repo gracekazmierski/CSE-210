@@ -1,0 +1,4 @@
+AdultUser:gkaz,18,97,65,Female,3
+AthleteUser:tombrady,40,190,74,Male,2
+ChildUser:child,12,95,60,Male,2
+

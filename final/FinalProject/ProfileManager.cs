@@ -29,8 +29,9 @@ public class ProfileManager
         Console.Clear();
 
         // Collects the inputs using Validator
-        string name = Validator.GetValidString("Step 1: Please create a username: ");
-        int age = Validator.GetValidInt("\nStep 2: Please enter your age: ");
+        Console.WriteLine("========================================\n");
+        string name = Validator.GetValidString("\nStep 1: Please create a username: ");
+        int age = Validator.GetValidInt("\nStep 2: Please enter your age (6+): ", 6, 120);
         double weight = Validator.GetValidDouble("\nStep 3: Please enter your weight (in lbs): ");
         int height = Validator.GetValidInt("\nStep 4: Please enter your height (in inches): ");
         string gender;

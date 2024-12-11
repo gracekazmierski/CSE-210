@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 public abstract class User
 {
-/// fields for the user class and all child classes
+    // fields for the user class and all child classes
     protected string _name;
     protected int _age;
     protected double _weight;
@@ -14,15 +14,15 @@ public abstract class User
     protected double _TDEE;
     protected double _BMR;
     protected double _dailyCalories;
-
-// getters and setters for info needed outside the class
+    
+    // getters and setters for info needed outside the class
     public string Name { get { return _name; } set { _name = value; }}
-    public double TDEE {get {return _TDEE;} set {_TDEE = value;}}
-    public double DailyCalories {get {return _dailyCalories;} set {_dailyCalories = value;}}
+    public double TDEE { get { return _TDEE; } set { _TDEE = value; } }
+    public double DailyCalories { get { return _dailyCalories; } set { _dailyCalories = value; } }
 
     public abstract string GetStringRepresentation();
 
-// constructor, initializes objects
+    // constructor, initializes objects
     public User(string name, int age, double weight, int height, string gender, int activityLevel)
     {
         _name = name;
@@ -33,21 +33,21 @@ public abstract class User
         _activityLevel = activityLevel;
     }
 
-// calculates BMI by taking weight in pounds and converting to kg, then dividing by height^2.
+    // calculates BMI by taking weight in pounds and converting to kg, then dividing by height^2.
     public double CalcBMI()
     {
-        if (_height > 0) 
+        if (_height > 0)
         {
-           _BMI = (_weight * 703) / Math.Pow(_height, 2);
+            _BMI = (_weight * 703) / Math.Pow(_height, 2);
         }
         else
         {
-            _BMI = 0; 
+            _BMI = 0;
         }
         return Math.Round(_BMI, 2);
     }
 
-// calculates BMR using Mifflin-St Jeor Equation for Men and Women
+    // calculates BMR using Mifflin-St Jeor Equation for Men and Women
     public virtual double CalculateBMR()
     {
         if (_gender.ToLower() == "male")
@@ -61,8 +61,10 @@ public abstract class User
         _BMR = Math.Round(_BMR, 2);
         return _BMR;
     }
+
     // this string sets the name of their activity level
     protected string _levelName;
+
     // calculates TDEE (Total Daily Energy Estimate)
     public virtual double CalcTDEE()
     {
@@ -92,38 +94,39 @@ public abstract class User
                 break;
         }
 
-        _TDEE = _BMR * _activityFactor; 
+        _TDEE = _BMR * _activityFactor;
         _TDEE = Math.Round(_TDEE, 2);
         _dailyCalories = _TDEE;
         return _TDEE;
     }
 
-// displays the user's profile
+    // displays the user's profile
     public void DisplayProfile()
     {
-    Console.Clear();
-    Console.WriteLine("=====================================");
-    Console.WriteLine($"            Profile");
-    Console.WriteLine("=====================================");
-    Console.WriteLine();
+        Console.Clear();
+        Console.WriteLine("=====================================");
+        Console.WriteLine($"            Profile");
+        Console.WriteLine("=====================================");
+        Console.WriteLine();
 
-    Console.WriteLine($"{"Name:",-20} {_name}");
-    Console.WriteLine($"{"Age:",-20} {_age} years");
-    Console.WriteLine($"{"Weight:",-20} {_weight} lbs");
-    Console.WriteLine($"{"Height:",-20} {_height} inches");
-    Console.WriteLine($"{"Sex:",-20} {_gender}");
-    Console.WriteLine($"{"Activity Level:",-20} {_levelName}");
-    Console.WriteLine($"{"BMI:",-20} {_BMI:F2}");
-    Console.WriteLine($"{"BMR:",-20} {_BMR:F2} cal/day");
-    Console.WriteLine($"{"TDEE:",-20} {_TDEE:F2} cal/day");
+        Console.WriteLine($"{"Name:",-20} {_name}");
+        Console.WriteLine($"{"Age:",-20} {_age} years");
+        Console.WriteLine($"{"Weight:",-20} {_weight} lbs");
+        Console.WriteLine($"{"Height:",-20} {_height} inches");
+        Console.WriteLine($"{"Sex:",-20} {_gender}");
+        Console.WriteLine($"{"Activity Level:",-20} {_levelName}");
+        Console.WriteLine($"{"BMI:",-20} {_BMI:F2}");
+        Console.WriteLine($"{"BMR:",-20} {_BMR:F2} cal/day");
+        Console.WriteLine($"{"TDEE:",-20} {_TDEE:F2} cal/day");
 
-    Console.WriteLine();
-    Console.WriteLine("=====================================");
+        Console.WriteLine();
+        Console.WriteLine("=====================================");
     }
 
     // calculates activity level for adults and children
     public virtual void CalcActivity()
     {
+        Console.Clear();
         Console.WriteLine("Please enter your approximate acitivty level: ");
         Console.WriteLine("   1. Sedentary (<30 minutes per day of exercise or moderate activity)");
         Console.WriteLine("   2. Low Active (30-60 minutes per day of light-to-moderate exercise)");
@@ -131,11 +134,12 @@ public abstract class User
         Console.WriteLine("   4. Very active (>90 minutes per day of moderate-to-vigerous activity)");
         _activityLevel = Convert.ToInt32(Console.ReadLine());
     }
-    // calculates maintenence calories, which is just their TDEE
-    public void MaintinenceCals()
+
+    // calculates maintenance calories, which is just their TDEE
+    public void MaintenanceCals()
     {
         Console.Clear();
-        Console.WriteLine("To calculate your maintinence calories, we take your BMR (basal metabloic rate) and multiple it by your activity level.");
+        Console.WriteLine("To calculate your maintenance calories, we take your BMR (basal metabolic rate) and multiple it by your activity level.");
         Console.WriteLine($"Your BMR is: {_BMR}.");
         Console.WriteLine($"Your activity level is: {_levelName}");
         Console.WriteLine($"To maintain your current weight, you should eat {_TDEE} cal/day.");
@@ -148,8 +152,38 @@ public abstract class User
     // this abstract method is the same as WeightGainCalc(), but it is the reversed for weight loss.
     // it follows the same logic (i.e. athletes can lose 3 lbs, adults can lose 2, children only 1).
     public abstract void WeightLossCalc();
+
     // this method will calculate how much fluid (water) is needed to stay hydrated. it is different for each class.
     public abstract void FluidsCalc();
 
+    // update profile method
+    public void UpdateProfile()
+    {
+        Console.Clear();
+        Console.WriteLine("=====================================");
+        Console.WriteLine("          Update Profile");
+        Console.WriteLine("=====================================");
+        
+        _name = Validator.GetValidString("Update your name: ");
+        _age = Validator.GetValidInt("Update your age: ");
+        _weight = Validator.GetValidDouble("Update your weight (in lbs): ");
+        _height = Validator.GetValidInt("Update your height (in inches): ");
+        
+        while (true)
+        {
+            _gender = Validator.GetValidString("Update your gender (Male/Female): ");
+            if (_gender.Equals("Male", StringComparison.OrdinalIgnoreCase) || 
+            _gender.Equals("Female", StringComparison.OrdinalIgnoreCase)) 
+            break;
+            Console.WriteLine("Gender must be 'Male' or 'Female'.");
+        }
 
+        CalcBMI();
+        CalcTDEE();
+        CalculateBMR();
+
+        Console.WriteLine("Profile updated successfully!");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+    }
 }

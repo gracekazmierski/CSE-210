@@ -22,7 +22,7 @@ public class Validator
         return value;
     }
 
-    public static int GetValidInt(string prompt)
+    public static int GetValidInt(string prompt, int min = int.MinValue, int max = int.MaxValue)
     {
         int value;
         while (true)
@@ -30,17 +30,18 @@ public class Validator
             Console.Write(prompt);
             string input = Console.ReadLine();
 
-            if (int.TryParse(input, out value) && value >= 0)
+            if (int.TryParse(input, out value) && value >= min && value <= max)
             {
-                break; // Valid input; exit the loop
+                break; // Valid input within range; exit the loop
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter a valid integer.");
+                Console.WriteLine($"Invalid input. Please enter a valid integer between {min} and {max}.");
             }
         }
         return value;
     }
+
 
     public static string GetValidString(string prompt)
     {
