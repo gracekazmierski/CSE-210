@@ -74,6 +74,7 @@ public class Program
                     user.CalcBMI();
                     user.CalcTDEE();
                     user.CalculateBMR();
+                    user.FluidsCalc();
                     user.DisplayProfile();
                     Console.WriteLine("Press any key to return to the profile management menu...");
                     Console.ReadKey();
@@ -157,7 +158,7 @@ public class Program
             Console.WriteLine("2. Fitness Reccomendadtions");
             Console.WriteLine("3. Sleep Reccomendations");
             Console.WriteLine("4. Quit");
-            int guidechoice = Validator.GetValidInt("\nI need help with: ");
+            int guidechoice = Validator.GetValidInt("\nI need help with: ", 1, 4);
             switch (guidechoice)
             {
                 case 1:
@@ -178,7 +179,7 @@ public class Program
                 case 4:
                     break;
                 default: // bad input
-                    Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
+                    Console.WriteLine("Invalid choice. Please enter 1, 2, 3, or 4.");
                     Console.WriteLine("Press any key to try again...");
                     Console.ReadKey();
                 continue; // restart the loop

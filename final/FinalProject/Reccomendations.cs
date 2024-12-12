@@ -8,7 +8,6 @@ public class Reccomendations {
                 Console.WriteLine("\nOne pound of adipose tissue is equal to approximately 3500 calories.");
                 Console.WriteLine("To lose one pound, you need a negative caloric energy balance of 3500 calories.");
                 Console.WriteLine("This means to lose 1 pound each week, you must reduce your maintenance calories by 500.");
-                Console.WriteLine("Weight loss is generally sustainable at about 0.5-2 pounds per week.\n");
 
                 if (user.BMI < 18.5)
                 {

@@ -1,5 +1,6 @@
 public class ChildUser: User
 {
+// child class constructor
     public ChildUser(string name, int age, double weight, int height, string gender, int activityLevel)
     : base(name, age, weight, height, gender, activityLevel)
     {
@@ -13,6 +14,7 @@ public class ChildUser: User
 
     public override string GetStringRepresentation() { return $"ChildUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}"; }
 
+// BMR calculation for child based on CDC calculations
     public override double CalculateBMR()
     {
         if (_gender.ToLower() == "male")
@@ -41,6 +43,7 @@ public class ChildUser: User
         return _BMR;
     }
 
+// child weight loss calculator (0.5-1lbs per week)
     public override void WeightLossCalc()
     {
         Console.Clear();
@@ -75,6 +78,7 @@ public class ChildUser: User
         Console.WriteLine($"Your target daily caloric goal is: {_dailyCalories}");
         Console.WriteLine("================================================");
     }
+// calculates child weight gain (0.5-1 lbs per week.)
     public override void WeightGainCalc()
     {
         Console.Clear();
@@ -109,8 +113,22 @@ public class ChildUser: User
         Console.WriteLine($"Your target daily caloric goal is: {_dailyCalories}");
         Console.WriteLine("================================================");
     }
-    public override void FluidsCalc()
+
+// calculates fluids for children
+    public override double FluidsCalc()
     {
-        throw new NotImplementedException();
+        if (_age >= 6 && _age <= 9)
+        {
+            _fluidOz = 40;
+        }
+        else if (_age >= 10 && _age <= 13)
+        {
+            _fluidOz = 60;
+        }
+        else if (_age >= 14 && _age < 18)
+        {
+            _fluidOz = 72;
+        }
+        return _fluidOz;
     }
 }

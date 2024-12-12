@@ -1,5 +1,6 @@
 public class AthleteUser: User
 {
+// athlete class cosntructor
     public AthleteUser(string name, int age, double weight, int height, string gender, int activityLevel)
         : base(name, age, weight, height, gender, activityLevel)
     {
@@ -13,16 +14,21 @@ public class AthleteUser: User
 
     public override string GetStringRepresentation() { return $"AthleteUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}"; }
 
+// calculates athlete activity level
     public override void CalcActivity()
     {
         Console.Clear();
-        Console.WriteLine("Please enter your approximate acitivty level: ");
-        Console.WriteLine("   1. Moderate Athlete (1-2 hours daily training)");
-        Console.WriteLine("   2. Advanced Athlete (2-4 hours daily training)");
-        Console.WriteLine("   3. Elite Athlete (4-6 hours daily training)");
+        Console.WriteLine("Please enter your approximate activity level:");
+        Console.WriteLine("---------------------------------------------------------");
+        Console.WriteLine("   1. Moderate Athlete   (1-2 hours of daily training)");
+        Console.WriteLine("   2. Advanced Athlete   (2-4 hours of daily training)");
+        Console.WriteLine("   3. Elite Athlete      (4-6 hours of daily training)");
+        Console.WriteLine("---------------------------------------------------------");
+        Console.WriteLine("\nChoose the option that best matches your typical daily training routine.");
         _activityLevel = Convert.ToInt16(Console.ReadLine());
     }
 
+// calculates TDEE for athletes based on activity level
     public override double CalcTDEE()
     {
         double _BMR = CalculateBMR();
@@ -53,6 +59,7 @@ public class AthleteUser: User
         return _TDEE;
     }
 
+// calculates weight loss for athletes (0-3 lbs)
     public override void WeightLossCalc()
     {
         Console.Clear();
@@ -87,7 +94,7 @@ public class AthleteUser: User
         Console.WriteLine($"Your target daily caloric goal is: {_dailyCalories}");
         Console.WriteLine("================================================");
     }
-
+// calculates weight gain for athletes (0-3 lbs)
     public override void WeightGainCalc()
     {
         Console.Clear();
@@ -123,9 +130,24 @@ public class AthleteUser: User
         Console.WriteLine("================================================");
     }
 
-    public override void FluidsCalc()
+// calculates fluids for athletes
+    public override double FluidsCalc()
     {
-        throw new NotImplementedException();
+        _fluidOz = (_weight / 2);
+        if (_activityLevel == 1)
+        {
+            _fluidOz = _fluidOz + 40;
+        }
+        else if (_activityLevel == 2)
+        {
+            _fluidOz = _fluidOz + 50;
+        }
+        else if (_activityLevel == 3)
+        {
+            _fluidOz = _fluidOz + 60;
+        }
+        _fluidOz = Math.Round(_fluidOz,2);
+        return _fluidOz;
     }
 
 }

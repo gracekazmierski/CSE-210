@@ -2,7 +2,7 @@ using System;
 
 public static class MacronutrientCalculator
 {
-    public static void Calculate(User user)
+    public static void Calculate(User user) // calculate protein, fats, carbs for user
     {
         user.CalculateBMR();
         user.CalcTDEE();

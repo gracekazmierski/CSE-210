@@ -9,7 +9,7 @@ public static class FileManager
     {
         using (StreamWriter writer = new StreamWriter(filePath))
         {
-            // Writes each user's string representation
+            // writes each user's string representation
             foreach (var user in users)
             {
                 writer.WriteLine(user.GetStringRepresentation());
@@ -40,7 +40,7 @@ public static class FileManager
 
                 User user = null;
 
-                switch (userType)
+                switch (userType) // new users based on type
                 {
                     case "AdultUser":
                         user = new AdultUser(name, age, weight, height, gender, activityLevel);
@@ -56,14 +56,10 @@ public static class FileManager
                         break;
                 }
 
-                if (user != null)
+                if (user != null) // adds user if not null
                 {
                     users.Add(user);
                 }
-            }
-            else
-            {
-                Console.WriteLine($"Skipping invalid line in file: {line}");
             }
         }
         return users;
@@ -76,9 +72,9 @@ public static class FileManager
         {
             if (user.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
             {
-                return user; // Returns the user if the name matches
+                return user; 
             }
         }
-        return null; // User name is not found
+        return null; // user name is not found
     }
 }

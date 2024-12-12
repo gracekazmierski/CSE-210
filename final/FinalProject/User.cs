@@ -14,6 +14,7 @@ public abstract class User
     protected double _TDEE;
     protected double _BMR;
     protected double _dailyCalories;
+    protected double _fluidOz;
     
     // getters and setters for info needed outside the class
     public string Name { get { return _name; } set { _name = value; }}
@@ -124,6 +125,7 @@ public abstract class User
         Console.WriteLine($"{"BMI:",-20} {_BMI:F2}");
         Console.WriteLine($"{"BMR:",-20} {_BMR:F2} cal/day");
         Console.WriteLine($"{"TDEE:",-20} {_TDEE:F2} cal/day");
+        Console.WriteLine($"{"Fluid Intake:",-20} {_fluidOz:F2} oz/day");
 
         Console.WriteLine();
         Console.WriteLine("=====================================");
@@ -133,11 +135,14 @@ public abstract class User
     public virtual void CalcActivity()
     {
         Console.Clear();
-        Console.WriteLine("Please enter your approximate acitivty level: ");
-        Console.WriteLine("   1. Sedentary (<30 minutes per day of exercise or moderate activity)");
-        Console.WriteLine("   2. Low Active (30-60 minutes per day of light-to-moderate exercise)");
-        Console.WriteLine("   3. Moderately Active (60-90 minutes per day of moderate-intensity exercise)");
-        Console.WriteLine("   4. Very active (>90 minutes per day of moderate-to-vigerous activity)");
+        Console.WriteLine("Please enter your approximate activity level:");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("   1. Sedentary       (< 30 minutes/day of exercise or moderate activity)");
+        Console.WriteLine("   2. Low Active      (30-60 minutes/day of light-to-moderate exercise)");
+        Console.WriteLine("   3. Moderately Active (60-90 minutes/day of moderate-intensity exercise)");
+        Console.WriteLine("   4. Very Active     (> 90 minutes/day of moderate-to-vigorous activity)");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("\nChoose the level that best matches your typical daily activity.");
         _activityLevel = Convert.ToInt32(Console.ReadLine());
     }
 
@@ -160,5 +165,5 @@ public abstract class User
     public abstract void WeightLossCalc();
 
     // this method will calculate how much fluid (water) is needed to stay hydrated. it is different for each class.
-    public abstract void FluidsCalc();
+    public abstract double FluidsCalc();
 }

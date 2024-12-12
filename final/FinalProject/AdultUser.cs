@@ -1,5 +1,6 @@
 public class AdultUser : User
 {
+// adult user constructor
     public AdultUser(string name, int age, double weight, int height, string gender, int activityLevel)
         : base(name, age, weight, height, gender, activityLevel)
     {
@@ -13,6 +14,7 @@ public class AdultUser : User
 
     public override string GetStringRepresentation() { return $"AdultUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}"; }
 
+// weight gain calculator for adults (0-2lbs)
     public override void WeightGainCalc()
     {
         Console.Clear();
@@ -48,7 +50,7 @@ public class AdultUser : User
         Console.WriteLine("================================================");
     }
 
-
+// adult weight loss calculator (0-2 lbs)
     public override void WeightLossCalc()
     {
         Console.Clear();
@@ -84,9 +86,23 @@ public class AdultUser : User
         Console.WriteLine("================================================");
     }
 
-
-    public override void FluidsCalc()
+// calculates fluids for adults
+    public override double FluidsCalc()
     {
-        throw new NotImplementedException();
+        _fluidOz = (_weight / 2);
+        if (_activityLevel == 2)
+        {
+            _fluidOz = _fluidOz + 10;
+        }
+        else if (_activityLevel == 3)
+        {
+            _fluidOz = _fluidOz + 20;
+        }
+        else if (_activityLevel == 4)
+        {
+            _fluidOz = _fluidOz + 30;
+        }
+        _fluidOz = Math.Round(_fluidOz,2);
+        return _fluidOz;
     }
 }
