@@ -1,6 +1,6 @@
-public class AthleteUser: User
+public class AthleteUser : User
 {
-// athlete class cosntructor
+    // athlete class constructor
     public AthleteUser(string name, int age, double weight, int height, string gender, int activityLevel)
         : base(name, age, weight, height, gender, activityLevel)
     {
@@ -12,9 +12,13 @@ public class AthleteUser: User
         _activityLevel = activityLevel;
     }
 
-    public override string GetStringRepresentation() { return $"AthleteUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}"; }
+    // gets the string representation of an athlete user
+    public override string GetStringRepresentation()
+    {
+        return $"AthleteUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}";
+    }
 
-// calculates athlete activity level
+    // calculates athlete activity level
     public override void CalcActivity()
     {
         Console.Clear();
@@ -25,10 +29,11 @@ public class AthleteUser: User
         Console.WriteLine("   3. Elite Athlete      (4-6 hours of daily training)");
         Console.WriteLine("---------------------------------------------------------");
         Console.WriteLine("\nChoose the option that best matches your typical daily training routine.");
-        _activityLevel = Convert.ToInt16(Console.ReadLine());
+        
+        _activityLevel = Validator.GetValidInt("Your choice: ", 1, 3);
     }
 
-// calculates TDEE for athletes based on activity level
+    // calculates TDEE for athletes based on activity level
     public override double CalcTDEE()
     {
         double _BMR = CalculateBMR();
@@ -49,17 +54,17 @@ public class AthleteUser: User
                 _levelName = "Elite Athlete";
                 break;
             default:
-                _activityFactor = 1.75; 
+                _activityFactor = 1.75;
                 break;
         }
 
-        _TDEE = _BMR * _activityFactor; 
-        _TDEE = Math.Round(_TDEE,2);
+        _TDEE = _BMR * _activityFactor;
+        _TDEE = Math.Round(_TDEE, 2);
         _dailyCalories = _TDEE;
         return _TDEE;
     }
 
-// calculates weight loss for athletes (0-3 lbs)
+    // calculates weight loss for athletes (0.5-3 lbs per week)
     public override void WeightLossCalc()
     {
         Console.Clear();
@@ -67,34 +72,27 @@ public class AthleteUser: User
         {
             Console.WriteLine("================================================");
             Console.WriteLine("The number of recommended pounds to lose each week is 0.5 - 3 pounds.\n");
-            Console.WriteLine("How much weight would you like to lose per week?");
-            Console.Write("Enter number of pounds per week: ");
-            
-            double _lossChoice;
-            if (!double.TryParse(Console.ReadLine(), out _lossChoice))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                continue;
-            }
+            double lossChoice = Validator.GetValidDouble("How much weight would you like to lose per week? Enter number of pounds per week: ");
 
-            if (_lossChoice < 0)
+            if (lossChoice < 0)
             {
                 Console.WriteLine("Please enter a number greater than 0.");
             }
-            else if (_lossChoice > 3)
+            else if (lossChoice > 3)
             {
                 Console.WriteLine("It is not recommended that you lose more than 3 pounds per week.");
             }
-            else if (_lossChoice <= 3 && _lossChoice > 0)
+            else if (lossChoice <= 3 && lossChoice > 0)
             {
-                _dailyCalories = _TDEE - ((_lossChoice * 3500) / 7);
+                _dailyCalories = _TDEE - ((lossChoice * 3500) / 7);
                 break;
             }
         }
         Console.WriteLine($"Your target daily caloric goal is: {_dailyCalories}");
         Console.WriteLine("================================================");
     }
-// calculates weight gain for athletes (0-3 lbs)
+
+    // calculates weight gain for athletes (0.5-3 lbs per week)
     public override void WeightGainCalc()
     {
         Console.Clear();
@@ -102,27 +100,19 @@ public class AthleteUser: User
         {
             Console.WriteLine("================================================");
             Console.WriteLine("The number of recommended pounds to gain each week is 0.5 - 3 pounds.\n");
-            Console.WriteLine("How much weight would you like to gain per week?");
-            Console.Write("Enter number of pounds per week: ");
-            
-            double _gainChoice;
-            if (!double.TryParse(Console.ReadLine(), out _gainChoice))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                continue;
-            }
+            double gainChoice = Validator.GetValidDouble("How much weight would you like to gain per week? Enter number of pounds per week: ");
 
-            if (_gainChoice < 0)
+            if (gainChoice < 0)
             {
                 Console.WriteLine("Please enter a number greater than 0.");
             }
-            else if (_gainChoice > 3)
+            else if (gainChoice > 3)
             {
                 Console.WriteLine("It is not recommended that you gain more than 3 pounds per week.");
             }
-            else if (_gainChoice <= 3 && _gainChoice > 0)
+            else if (gainChoice <= 3 && gainChoice > 0)
             {
-                _dailyCalories = _TDEE + ((_gainChoice * 3500) / 7);
+                _dailyCalories = _TDEE + ((gainChoice * 3500) / 7);
                 break;
             }
         }
@@ -130,24 +120,23 @@ public class AthleteUser: User
         Console.WriteLine("================================================");
     }
 
-// calculates fluids for athletes
+    // calculates fluid intake for athletes
     public override double FluidsCalc()
     {
         _fluidOz = (_weight / 2);
         if (_activityLevel == 1)
         {
-            _fluidOz = _fluidOz + 40;
+            _fluidOz += 40;
         }
         else if (_activityLevel == 2)
         {
-            _fluidOz = _fluidOz + 50;
+            _fluidOz += 50;
         }
         else if (_activityLevel == 3)
         {
-            _fluidOz = _fluidOz + 60;
+            _fluidOz += 60;
         }
-        _fluidOz = Math.Round(_fluidOz,2);
+        _fluidOz = Math.Round(_fluidOz, 2);
         return _fluidOz;
     }
-
 }

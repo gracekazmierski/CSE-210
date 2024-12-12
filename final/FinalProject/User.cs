@@ -29,15 +29,15 @@ public abstract class User
 
     public abstract string GetStringRepresentation();
 
-    // constructor, initializes objects
+    // constructor that initializes a new User object
     public User(string name, int age, double weight, int height, string gender, int activityLevel)
     {
-        _name = name;
-        _age = age;
-        _weight = weight;
-        _height = height;
-        _gender = gender;
-        _activityLevel = activityLevel;
+        _name = name; // the name of the user
+        _age = age; // the age of the user
+        _weight = weight; // the weight of the user in pounds
+        _height = height; // the height of the user in inches
+        _gender = gender; // the gender of the user ("Male" or "Female")
+        _activityLevel = activityLevel; // the activity level of the user
     }
 
     // calculates BMI by taking weight in pounds and converting to kg, then dividing by height^2.
@@ -143,8 +143,14 @@ public abstract class User
         Console.WriteLine("   4. Very Active     (> 90 minutes/day of moderate-to-vigorous activity)");
         Console.WriteLine("---------------------------------------------------");
         Console.WriteLine("\nChoose the level that best matches your typical daily activity.");
-        _activityLevel = Convert.ToInt32(Console.ReadLine());
+        while (true)
+            {
+                _activityLevel = Convert.ToInt32(Console.ReadLine());
+                if (_activityLevel >= 1 && _activityLevel <= 4) break;
+                Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
+            }
     }
+
 
     // calculates maintenance calories, which is just their TDEE
     public void MaintenanceCals()

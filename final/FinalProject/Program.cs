@@ -5,10 +5,10 @@ public class Program
 {
     static void Main(string[] args)
     {
-        // creates an instance of ProfileManager, loading existing data
+        // loads the existing data
         ProfileManager profileManager = new ProfileManager();
 
-        // program begins with a menu to create a new profile or load an existing profile
+        // begins with a menu to create a new profile or load an existing profile
         while (true)
         {
             Console.Clear();
@@ -23,14 +23,14 @@ public class Program
             int choice = Validator.GetValidInt("\nPlease enter the number of your choice: ");
             switch (choice)
             {
-                case 1: // create new profile
+                case 1: // create a new profile
                     User user = profileManager.CreateUser();
                     if (user != null)
                     {
                         ProfileMenu(user);
                     }
                     break;
-                case 2: // load profile
+                case 2: // load a profile
                     user = profileManager.LoadProfile();
                     if (user != null)
                     {
@@ -39,9 +39,9 @@ public class Program
                     break;
                 case 3:
                     profileManager.SaveUsers();
-                    return; // quit
+                    return; // Quit
                 default:
-                    Console.WriteLine("Invalid choice. Please try again."); // bad input
+                    Console.WriteLine("Invalid choice. Please try again."); // Bad input
                     Console.WriteLine("Press any key to return to the main menu...");
                     Console.ReadKey();
                     break;
@@ -70,7 +70,7 @@ public class Program
 
             switch (profileChoice)
             {
-                case 1: // displays the profile
+                case 1: // Displays the profile
                     user.CalcBMI();
                     user.CalcTDEE();
                     user.CalculateBMR();
@@ -79,24 +79,24 @@ public class Program
                     Console.WriteLine("Press any key to return to the profile management menu...");
                     Console.ReadKey();
                     break;
-                case 2: // updates the profile
+                case 2: // update the profile
                     profileManager.UpdateProfile(user);
                     break;
-                case 3: // opens the calorie intake menu
+                case 3: // open the calorie intake menu
                     user.CalcTDEE();
                     user.CalculateBMR();
                     CalorieIntakeMenu(user);
                     break;
-                case 4: // calculates macronutrients
+                case 4: // calcuate macronutrients
                     MacronutrientCalculator.Calculate(user);
                     break;
                 case 5: // get recommendations
                     ReccomendationsMenu(user);
                     break;
                 case 6:
-                    return; // quits menu
+                    return; // quit
                 default:
-                    Console.WriteLine("Invalid choice. Please try again."); // bad input
+                    Console.WriteLine("Invalid choice. Please try again."); // Bad input
                     Console.WriteLine("Press any key to return to the profile management menu...");
                     Console.ReadKey();
                     break;
@@ -121,22 +121,22 @@ public class Program
 
             switch (weightChoice)
             {
-                case 1: // shows TDEE
+                case 1: // displays the user's TDEE
                     user.MaintenanceCals();
                     break;
-                case 2: // shows calorie goal for losing weight
+                case 2: // displays calorie goal for losing weight
                     user.WeightLossCalc();
                     break;
-                case 3: // shows calorie goal for gaining weight
+                case 3: // displays calorie goal for gaining weight
                     user.WeightGainCalc();
                     break;
                 default: // bad input
                     Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
                     Console.WriteLine("Press any key to try again...");
                     Console.ReadKey();
-                    continue; // restart the loop
+                    continue; 
             }
-            break; // valid input; exit the loop
+            break; 
         }
         Console.WriteLine("Press any key to return to the profile management menu...");
         Console.ReadKey();
@@ -145,33 +145,33 @@ public class Program
     // reccomendations menu
     static void ReccomendationsMenu(User user)
     {
-        while(true)
+        while (true)
         {
-        Console.Clear();
+            Console.Clear();
             Console.WriteLine("==============================================");
             Console.WriteLine($"         Janet - Your Health Guide");
             Console.WriteLine("==============================================\n");
-            Console.WriteLine("Hello! My name is Janet, and I am your health reccomendations guide!");
+            Console.WriteLine("Hello! My name is Janet, and I am your health recommendations guide!");
             Console.WriteLine("What would you like to focus on today? ");
             Console.WriteLine("I need help with... ");
             Console.WriteLine("1. Weight Management ");
-            Console.WriteLine("2. Fitness Reccomendadtions");
-            Console.WriteLine("3. Sleep Reccomendations");
+            Console.WriteLine("2. Fitness Recommendations");
+            Console.WriteLine("3. Sleep Recommendations");
             Console.WriteLine("4. Quit");
             int guidechoice = Validator.GetValidInt("\nI need help with: ", 1, 4);
             switch (guidechoice)
             {
-                case 1:
+                case 1: // weight reccomendations based on BMI
                     Reccomendations.BMIRecommendation(user);
                     Console.WriteLine("\nPress any key to return to the menu...");
                     Console.ReadKey();
                     continue;
-                case 2:
+                case 2: // fitness reccomendations
                     Reccomendations.FitnessRec(user);
                     Console.WriteLine("\nPress any key to return to the menu...");
                     Console.ReadKey();
                     continue;
-                case 3:
+                case 3: // sleep reccomendations
                     Reccomendations.SleepRec(user);
                     Console.WriteLine("\nPress any key to return to the menu...");
                     Console.ReadKey();
@@ -182,10 +182,9 @@ public class Program
                     Console.WriteLine("Invalid choice. Please enter 1, 2, 3, or 4.");
                     Console.WriteLine("Press any key to try again...");
                     Console.ReadKey();
-                continue; // restart the loop
+                    continue; 
             }
             break;
         }
     }
 }
-

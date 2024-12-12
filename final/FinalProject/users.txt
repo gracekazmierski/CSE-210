@@ -1,5 +1,3 @@
-AdultUser:gracekazzy,18,100,65,Female,3
+AdultUser:gkaz,19,100,65,Female,3
 AthleteUser:tombrady,40,180,71,Male,1
 ChildUser:kiddo,9,70,58,Male,2
-
-

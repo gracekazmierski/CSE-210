@@ -2,7 +2,8 @@ using System;
 
 public static class MacronutrientCalculator
 {
-    public static void Calculate(User user) // calculate protein, fats, carbs for user
+    // calculate user goals for protein, fats, and carbs based on daily calorie goal
+    public static void Calculate(User user) 
     {
         user.CalculateBMR();
         user.CalcTDEE();
@@ -34,6 +35,7 @@ public static class MacronutrientCalculator
                 double carbsCalories = (carbsPercentage / 100) * user.DailyCalories;
                 double fatCalories = (fatPercentage / 100) * user.DailyCalories;
 
+                // calculations to find grams based on percentages
                 double proteinGrams = proteinCalories / 4;
                 double carbsGrams = carbsCalories / 4;
                 double fatGrams = fatCalories / 9;
@@ -67,7 +69,7 @@ public static class MacronutrientCalculator
             }
         }
 
-        // Prompt to return to the menu
+        // prompt to return to the menu
         Console.WriteLine("\nPress any key to return to the profile management menu...");
         Console.ReadKey();
     }

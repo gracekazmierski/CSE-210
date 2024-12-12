@@ -5,13 +5,13 @@ public class ProfileManager
 {
     private List<User> _users;
 
-    // Initializes _users by loading in the data from the text file
+    // initializes _users by loading in the data from the text file
     public ProfileManager()
     {
         _users = FileManager.LoadUsersFromFile("users.txt");
     }
 
-    // Profile creation method
+    // profile creation method
     public User CreateUser()
     {
         while (true) 
@@ -33,7 +33,7 @@ public class ProfileManager
             Console.WriteLine("========================================\n");
             string name = Validator.GetValidString("\nStep 1: Please create a username: ");
             int age = Validator.GetValidInt("\nStep 2: Please enter your age (6+): ", 6, 120);
-            // checks if age is above 18 for adults & athletes
+            // validates if age is above 18 for adults & athletes
             if ((profileChoice == 1 || profileChoice == 2) && age < 18) 
             {
                 Console.WriteLine("\nERROR: Age must be 18 or older for an Adult or Athlete Profile.");
@@ -71,7 +71,7 @@ public class ProfileManager
                 Console.WriteLine("========================================");
                 FileManager.SaveUsersToFile(_users, "users.txt");
             }
-            // profile creation fails
+            // test case for if creation fails
             else
             {
                 Console.WriteLine("Failed to create profile.");
@@ -83,7 +83,7 @@ public class ProfileManager
         }
     }
 
-    // loads profile from text file
+    // loads a profile from users.txt
     public User LoadProfile()
     {
         Console.Clear();
@@ -124,7 +124,7 @@ public class ProfileManager
         FileManager.SaveUsersToFile(_users, "users.txt");
     }
 
-    // method to user update profile
+    // method to update user profile
     public void UpdateProfile(User user)
     {
         Console.Clear();
@@ -149,4 +149,3 @@ public class ProfileManager
         Console.ReadKey();
     }
 }
-

@@ -1,6 +1,6 @@
 public class AdultUser : User
 {
-// adult user constructor
+    // adult user constructor
     public AdultUser(string name, int age, double weight, int height, string gender, int activityLevel)
         : base(name, age, weight, height, gender, activityLevel)
     {
@@ -12,9 +12,13 @@ public class AdultUser : User
         _activityLevel = activityLevel;
     }
 
-    public override string GetStringRepresentation() { return $"AdultUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}"; }
+    // gets the string representation of an adult user
+    public override string GetStringRepresentation()
+    {
+        return $"AdultUser:{_name},{_age},{_weight},{_height},{_gender},{_activityLevel}";
+    }
 
-// weight gain calculator for adults (0-2lbs)
+    // weight gain calculator for adults (0-2 lbs per week)
     public override void WeightGainCalc()
     {
         Console.Clear();
@@ -22,27 +26,19 @@ public class AdultUser : User
         {
             Console.WriteLine("================================================");
             Console.WriteLine("The number of recommended pounds to gain each week is 0.5 - 2 pounds.\n");
-            Console.WriteLine("How much weight would you like to gain per week?");
-            Console.Write("Enter number of pounds per week: ");
-            
-            double _gainChoice;
-            if (!double.TryParse(Console.ReadLine(), out _gainChoice))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                continue;
-            }
+            double gainChoice = Validator.GetValidDouble("How much weight would you like to gain per week? Enter number of pounds per week: ");
 
-            if (_gainChoice < 0)
+            if (gainChoice < 0)
             {
                 Console.WriteLine("Please enter a number greater than 0.");
             }
-            else if (_gainChoice > 2)
+            else if (gainChoice > 2)
             {
                 Console.WriteLine("It is not recommended that you gain more than 2 pounds per week.");
             }
-            else if (_gainChoice <= 2 && _gainChoice > 0)
+            else if (gainChoice <= 2 && gainChoice > 0)
             {
-                _dailyCalories = _TDEE + ((_gainChoice * 3500) / 7);
+                _dailyCalories = _TDEE + ((gainChoice * 3500) / 7);
                 break;
             }
         }
@@ -50,7 +46,7 @@ public class AdultUser : User
         Console.WriteLine("================================================");
     }
 
-// adult weight loss calculator (0-2 lbs)
+    // adult weight loss calculator (0-2 lbs per week)
     public override void WeightLossCalc()
     {
         Console.Clear();
@@ -58,27 +54,19 @@ public class AdultUser : User
         {
             Console.WriteLine("================================================");
             Console.WriteLine("The number of recommended pounds to lose each week is 0.5 - 2 pounds.\n");
-            Console.WriteLine("How much weight would you like to lose per week?");
-            Console.Write("Enter number of pounds per week: ");
-            
-            double _lossChoice;
-            if (!double.TryParse(Console.ReadLine(), out _lossChoice))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                continue;
-            }
+            double lossChoice = Validator.GetValidDouble("How much weight would you like to lose per week? Enter number of pounds per week: ");
 
-            if (_lossChoice < 0)
+            if (lossChoice < 0)
             {
                 Console.WriteLine("Please enter a number greater than 0.");
             }
-            else if (_lossChoice > 2)
+            else if (lossChoice > 2)
             {
                 Console.WriteLine("It is not recommended that you lose more than 2 pounds per week.");
             }
-            else if (_lossChoice <= 2 && _lossChoice > 0)
+            else if (lossChoice <= 2 && lossChoice > 0)
             {
-                _dailyCalories = _TDEE - ((_lossChoice * 3500) / 7);
+                _dailyCalories = _TDEE - ((lossChoice * 3500) / 7);
                 break;
             }
         }
@@ -86,23 +74,23 @@ public class AdultUser : User
         Console.WriteLine("================================================");
     }
 
-// calculates fluids for adults
+    // calculates fluid intake for adults
     public override double FluidsCalc()
     {
         _fluidOz = (_weight / 2);
         if (_activityLevel == 2)
         {
-            _fluidOz = _fluidOz + 10;
+            _fluidOz += 10;
         }
         else if (_activityLevel == 3)
         {
-            _fluidOz = _fluidOz + 20;
+            _fluidOz += 20;
         }
         else if (_activityLevel == 4)
         {
-            _fluidOz = _fluidOz + 30;
+            _fluidOz += 30;
         }
-        _fluidOz = Math.Round(_fluidOz,2);
+        _fluidOz = Math.Round(_fluidOz, 2);
         return _fluidOz;
     }
 }

@@ -2,6 +2,7 @@ using System;
 
 public class Validator
 {
+    // validates the input of doubles with a prompt
     public static double GetValidDouble(string prompt)
     {
         double value;
@@ -12,7 +13,7 @@ public class Validator
 
             if (double.TryParse(input, out value) && value >= 0)
             {
-                break; // Valid input; exit the loop
+                break;
             }
             else
             {
@@ -22,6 +23,7 @@ public class Validator
         return value;
     }
 
+    // validates the integer input and that it is in the correct range
     public static int GetValidInt(string prompt, int min = int.MinValue, int max = int.MaxValue)
     {
         int value;
@@ -32,7 +34,7 @@ public class Validator
 
             if (int.TryParse(input, out value) && value >= min && value <= max)
             {
-                break; // Valid input within range; exit the loop
+                break;
             }
             else
             {
@@ -42,7 +44,7 @@ public class Validator
         return value;
     }
 
-
+    // validates that strings are not empty
     public static string GetValidString(string prompt)
     {
         string value;
@@ -53,7 +55,7 @@ public class Validator
 
             if (!string.IsNullOrEmpty(value))
             {
-                break; // Valid input; exit the loop
+                break; 
             }
             else
             {
