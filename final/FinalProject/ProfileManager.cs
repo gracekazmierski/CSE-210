@@ -113,4 +113,32 @@ public class ProfileManager
     {
         FileManager.SaveUsersToFile(_users, "users.txt");
     }
+
+    // update profile
+    public void UpdateProfile(User user)
+    {
+        Console.Clear();
+        Console.WriteLine("========================================");
+        Console.WriteLine("        Update Your Profile             ");
+        Console.WriteLine("========================================\n");
+
+        user.Name = Validator.GetValidString("Update your name: ");
+        user.Age = Validator.GetValidInt("Update your age: ");
+        user.Weight = Validator.GetValidDouble("Update your weight (in lbs): ");
+        user.Height = Validator.GetValidInt("Update your height (in inches): ");
+
+        while (true)
+        {
+            user.Gender = Validator.GetValidString("Update your gender (Male/Female): ");
+            if (user.Gender.Equals("Male", StringComparison.OrdinalIgnoreCase) || user.Gender.Equals("Female", StringComparison.OrdinalIgnoreCase)) break;
+            Console.WriteLine("Gender must be 'Male' or 'Female'.");
+        }
+
+        Console.WriteLine("Profile updated successfully!");
+        SaveUsers();
+        Console.WriteLine("Profile saved to file.");
+        Console.WriteLine("Press any key to return to the profile management menu...");
+        Console.ReadKey();
+    }
 }
+

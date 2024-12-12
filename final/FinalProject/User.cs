@@ -17,8 +17,14 @@ public abstract class User
     
     // getters and setters for info needed outside the class
     public string Name { get { return _name; } set { _name = value; }}
+    public double Weight { get { return _weight; } set { _weight = value; }}
+    public int Height { get { return _height; } set { _height = value; }}
+    public string Gender { get { return _gender; } set { _gender = value; }}
     public double TDEE { get { return _TDEE; } set { _TDEE = value; } }
     public double DailyCalories { get { return _dailyCalories; } set { _dailyCalories = value; } }
+    public double BMI { get { return _BMI; } set { _BMI = value; } }
+    public int ActivityLevel { get { return _activityLevel;} set {_activityLevel = value;} }
+    public int Age { get {return _age; } set { _age = value; }}
 
     public abstract string GetStringRepresentation();
 
@@ -155,35 +161,4 @@ public abstract class User
 
     // this method will calculate how much fluid (water) is needed to stay hydrated. it is different for each class.
     public abstract void FluidsCalc();
-
-    // update profile method
-    public void UpdateProfile()
-    {
-        Console.Clear();
-        Console.WriteLine("=====================================");
-        Console.WriteLine("          Update Profile");
-        Console.WriteLine("=====================================");
-        
-        _name = Validator.GetValidString("Update your name: ");
-        _age = Validator.GetValidInt("Update your age: ");
-        _weight = Validator.GetValidDouble("Update your weight (in lbs): ");
-        _height = Validator.GetValidInt("Update your height (in inches): ");
-        
-        while (true)
-        {
-            _gender = Validator.GetValidString("Update your gender (Male/Female): ");
-            if (_gender.Equals("Male", StringComparison.OrdinalIgnoreCase) || 
-            _gender.Equals("Female", StringComparison.OrdinalIgnoreCase)) 
-            break;
-            Console.WriteLine("Gender must be 'Male' or 'Female'.");
-        }
-
-        CalcBMI();
-        CalcTDEE();
-        CalculateBMR();
-
-        Console.WriteLine("Profile updated successfully!");
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-    }
 }

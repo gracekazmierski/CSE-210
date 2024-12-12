@@ -1,3 +1,6 @@
+using System.Collections;
+using System.IO.Compression;
+
 public class Program
 {
     static void Main(string[] args)
@@ -49,16 +52,22 @@ public class Program
     // profile management, where the user can make calculations
     static void ProfileMenu(User user)
     {
+        ProfileManager profileManager = new ProfileManager();
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Profile Management Menu");
-            Console.WriteLine("1. Display Profile");
-            Console.WriteLine("2. Daily Calorie Intake Calculator");
-            Console.WriteLine("3. Calculate Macronutrients");
-            Console.WriteLine("4. Update Profile");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("*************************************************");
+            Console.WriteLine("*              Profile Management Menu          *");
+            Console.WriteLine("*************************************************");
+            Console.WriteLine("* 1. Display Profile                            *");
+            Console.WriteLine("* 2. Update Profile                             *");
+            Console.WriteLine("* 3. Daily Calorie Intake Calculator            *");
+            Console.WriteLine("* 4. Calculate Macronutrients                   *");
+            Console.WriteLine("* 5. Get Recommendations                        *");
+            Console.WriteLine("* 6. Quit                                       *");
+            Console.WriteLine("*************************************************");
             int profileChoice = Validator.GetValidInt("Please enter the number of your choice: ");
+
             switch (profileChoice)
             {
                 case 1: // displays the profile
@@ -69,19 +78,21 @@ public class Program
                     Console.WriteLine("Press any key to return to the profile management menu...");
                     Console.ReadKey();
                     break;
-                case 2: // opens the calorie intake menu
+                case 2: // updates the profile
+                    profileManager.UpdateProfile(user);
+                    break;
+                case 3: // opens the calorie intake menu
                     user.CalcTDEE();
                     user.CalculateBMR();
                     CalorieIntakeMenu(user);
                     break;
-                case 3: // calculates macronutrients
+                case 4: // calculates macronutrients
                     MacronutrientCalculator.Calculate(user);
                     break;
-                case 4:
-                    user.UpdateProfile();
-                    user.CalcActivity();
+                case 5: // get recommendations
+                    ReccomendationsMenu(user);
                     break;
-                case 5:
+                case 6:
                     return; // quits menu
                 default:
                     Console.WriteLine("Invalid choice. Please try again."); // bad input
@@ -129,4 +140,51 @@ public class Program
         Console.WriteLine("Press any key to return to the profile management menu...");
         Console.ReadKey();
     }
+
+    // reccomendations menu
+    static void ReccomendationsMenu(User user)
+    {
+        while(true)
+        {
+        Console.Clear();
+            Console.WriteLine("==============================================");
+            Console.WriteLine($"         Janet - Your Health Guide");
+            Console.WriteLine("==============================================\n");
+            Console.WriteLine("Hello! My name is Janet, and I am your health reccomendations guide!");
+            Console.WriteLine("What would you like to focus on today? ");
+            Console.WriteLine("I need help with... ");
+            Console.WriteLine("1. Weight Management ");
+            Console.WriteLine("2. Fitness Reccomendadtions");
+            Console.WriteLine("3. Sleep Reccomendations");
+            Console.WriteLine("4. Quit");
+            int guidechoice = Validator.GetValidInt("\nI need help with: ");
+            switch (guidechoice)
+            {
+                case 1:
+                    Reccomendations.BMIRecommendation(user);
+                    Console.WriteLine("\nPress any key to return to the menu...");
+                    Console.ReadKey();
+                    continue;
+                case 2:
+                    Reccomendations.FitnessRec(user);
+                    Console.WriteLine("\nPress any key to return to the menu...");
+                    Console.ReadKey();
+                    continue;
+                case 3:
+                    Reccomendations.SleepRec(user);
+                    Console.WriteLine("\nPress any key to return to the menu...");
+                    Console.ReadKey();
+                    continue;
+                case 4:
+                    break;
+                default: // bad input
+                    Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
+                    Console.WriteLine("Press any key to try again...");
+                    Console.ReadKey();
+                continue; // restart the loop
+            }
+            break;
+        }
+    }
 }
+
